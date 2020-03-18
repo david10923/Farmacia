@@ -8,6 +8,8 @@ public class TransferCliente {
 	private String nombre; 
 	private boolean estado;
 	
+	//hola que tal todo
+	
 	
 	public TransferCliente(String dni ,String tarjetaSanitaria, String nombre) {
 		this.dni = dni; 
@@ -20,6 +22,11 @@ public class TransferCliente {
 		
 	}
 	
+	
+	//borrar
+	public void funcion() {
+		System.out.println("hola");
+	}
 	
 	
 	
