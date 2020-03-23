@@ -1,18 +1,29 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Main.Main;
+import Presentacion.Cliente.GUICliente;
 import Presentacion.Vista.GUIFarmacia;
 import Presentacion.Vista.IGUI;
 import Tranfers.TCliente;
 
 public class ControllerImp extends Controller{
 	
-	private IGUI igui;
+	private IGUI gui;
 	private GUIFarmacia farmacia;
-
-	
 	
 	
 	public ControllerImp(){
+		farmacia = new GUIFarmacia(Main.name);
+		List<Object> guis = new ArrayList<>();
+		guis.add(new GUICliente());
+		
+		farmacia.initTabs();
+		//Añadir el resto de guis 
+		
+		
 		
 	}
 

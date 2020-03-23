@@ -1,5 +1,6 @@
 package Presentacion.Vista;
 
+import java.awt.BorderLayout;
 import java.awt.List;
 
 import javax.swing.JFrame;
@@ -30,11 +31,20 @@ public class GUIFarmacia extends JFrame{
 		this.setBounds(450,450,400,400);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());//comprobar 
+		
 	
 		
 		
 		
 		
+		
+		
+	}
+
+
+
+	public void initTabs() {
 		
 		
 	}
