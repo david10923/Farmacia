@@ -1,6 +1,6 @@
 package Tranfers;
 
-public class TransferCliente {
+public class TCliente {
 
 	private Integer codigo; 
 	private String dni;
@@ -10,14 +10,14 @@ public class TransferCliente {
 	
 	
 	
-	public TransferCliente(String dni ,String tarjetaSanitaria, String nombre) {
+	public TCliente(String dni ,String tarjetaSanitaria, String nombre) {
 		this.dni = dni; 
 		this.tarjetaSanitaria = tarjetaSanitaria ; 
 		this.nombre = nombre;
 		
 	}
 	
-	public TransferCliente() {
+	public TCliente() {
 		
 	}
 	

@@ -1,5 +1,12 @@
 package Presentacion.Cliente;
 
-public class GUICliente {
+import javax.swing.JDialog;
+
+public class GUICliente extends JDialog {
+	
+	
+	
+	
+	
 
 }
