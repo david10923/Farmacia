@@ -6,20 +6,27 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import Presentacion.Vista.OperationsPanel;
+import Presentacion.Vista.MostrarTodos;
+import Presentacion.Vista.MostrarUno;
 
 public class GUICliente extends JPanel {
 	
-	private OperationsPanel operationsPanel; 
-	private JPanel showAll; 
-	private JPanel show;
+	private OperationsPanel OperationsPanel; 
+	private JPanel MostrarTodos; 
+	private JPanel MostrarUno;
 	
 	
 	
 	public GUICliente(){
 		
 		this.setVisible(true);
-		operationsPanel = new OperationsPanel();
-		this.add(operationsPanel, BorderLayout.NORTH);
+		OperationsPanel = new OperationsPanel();
+		MostrarTodos = new MostrarTodos();
+		MostrarUno = new MostrarUno();
+		
+		this.add(OperationsPanel, BorderLayout.NORTH);
+		this.add(MostrarTodos, BorderLayout.EAST);
+		this.add(MostrarUno,BorderLayout.WEST);
 		
 	
 	}

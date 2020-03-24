@@ -21,6 +21,10 @@ public class OperationsPanel extends JPanel {
 	private JButton modificarBoton;
 	private JComboBox <Object> seleccionarBox;
 	
+	
+	private String nombreEntidad = "*";// hay que ver donde se dice que entidad es 
+	
+	
 	public OperationsPanel() {
 		super();
 		initOperationPanel();
@@ -28,38 +32,66 @@ public class OperationsPanel extends JPanel {
 	
 	
 	
-	public void initOperationPanel() {
-		
-		
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+	public void initOperationPanel() {	
+			
+		this.setLayout(new GridLayout());
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 1), "Operations",
 				TitledBorder.LEFT, TitledBorder.TOP));
 		
+		
+		this.setPreferredSize(new Dimension(700, 250));
+		
+		
 		this.setVisible(true);
+		
+		inicializarBotones();
+	
+		
+		
+		
+	}
+	
+	
+	void inicializarBotones(){
+		
+		Box caja1 = Box.createHorizontalBox();	
+		
+		
 		altaBoton      = new JButton("DAR DE ALTA");
 		bajaBoton      = new JButton("DAR DE BAJA");
 		modificarBoton = new JButton("MODIFICAR");
-		seleccionarBox = new JComboBox();
-		this.seleccionarBox.setSize(300, 200);
-		
-		this.add(Box.createVerticalGlue());
-		this.add(Box.createRigidArea(new Dimension(10, 1)));
-		
-		altaBoton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		altaBoton.setSize(new Dimension(100, 50));
+		seleccionarBox = new JComboBox<Object>();
+		seleccionarBox.setMaximumSize(new Dimension(200,25));
+		seleccionarBox.setMinimumSize(new Dimension(200,25));
+	
+			
+		caja1.add(Box.createHorizontalStrut(20));
+		caja1.add(altaBoton);
+		caja1.add(Box.createHorizontalStrut(20));
+		caja1.add(bajaBoton);
+		caja1.add(Box.createHorizontalStrut(20));
+		caja1.add(modificarBoton);		
+		caja1.add(seleccionarBox);
+
+		this.add(caja1);
+	
 		altaBoton.setVisible(true);
-		
-		bajaBoton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		bajaBoton.setSize(new Dimension(100, 50));
 		bajaBoton.setVisible(true);
+		modificarBoton.setVisible(true);
+		
+	
+	
 		
 		
-		this.add(altaBoton);
-		this.add(bajaBoton);
-		this.add(modificarBoton);
-		this.add(seleccionarBox);
+		
+		
+		
 		
 	}
+	
+	
+	
+	
 	
 }
 
