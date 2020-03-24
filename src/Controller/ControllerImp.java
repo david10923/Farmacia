@@ -18,9 +18,9 @@ public class ControllerImp extends Controller{
 	public ControllerImp(){
 		farmacia = new GUIFarmacia(Main.name);
 		List<Object> guis = new ArrayList<>();
-		guis.add(new GUICliente());
+		guis.add(new GUICliente());	
 		
-		farmacia.initTabs();
+		farmacia.initTabs(guis);
 		//Añadir el resto de guis 
 		
 		
