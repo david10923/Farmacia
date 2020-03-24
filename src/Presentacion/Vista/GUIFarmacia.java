@@ -29,7 +29,7 @@ public class GUIFarmacia extends JFrame{
 
 	public void initGui() {
 		
-		this.setBounds(350,250,800,600);
+		this.setBounds(350, 100,800,600);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());//comprobar 
