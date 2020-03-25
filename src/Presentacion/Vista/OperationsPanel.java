@@ -37,8 +37,6 @@ public class OperationsPanel extends JPanel {
 		this.setLayout(new GridLayout());
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 1), "Operations",
 				TitledBorder.LEFT, TitledBorder.TOP));
-		
-		
 		this.setPreferredSize(new Dimension(700, 250));
 		
 		
@@ -46,9 +44,6 @@ public class OperationsPanel extends JPanel {
 		
 		inicializarBotones();
 	
-		
-		
-		
 	}
 	
 	
