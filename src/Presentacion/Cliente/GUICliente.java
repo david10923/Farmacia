@@ -6,6 +6,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import Presentacion.Vista.OperationsPanel;
+import Presentacion.Vista.GUIFarmacia;
 import Presentacion.Vista.MostrarTodos;
 import Presentacion.Vista.MostrarUno;
 
@@ -20,7 +21,7 @@ public class GUICliente extends JPanel {
 	public GUICliente(){
 		
 		this.setVisible(true);
-		OperationsPanel = new OperationsPanel();
+		OperationsPanel = new OperationsPanel(GUIFarmacia.TAB_CLIENTE);
 		MostrarTodos = new MostrarTodos();
 		MostrarUno = new MostrarUno();
 		
