@@ -1,8 +1,9 @@
 package Negocio.Cliente;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
-import Integracion.DaoCliente.DaoCliente;
+import Integracion.DAOCliente.DAOCliente;
 import Tranfers.TCliente;
 
 public class SAClienteImp implements SACliente{
@@ -13,14 +14,17 @@ public class SAClienteImp implements SACliente{
 	}
 
 	@Override
-	public int create(TCliente tCliente) {
+	public int create(TCliente cliente) throws SQLException {
 		int id = -1; // nose si es esto o el evento 
 		
-		DaoCliente daoCliente;
+		DAOCliente DAOCliente=null;
 		
-		if(tCliente!= null){
+		if(cliente!= null){
 		//	TCliente leido ; Hacer un readByNif en daoCliente
-			
+			TCliente aux = DAOCliente.readByDNI(cliente.getDni());
+			if (aux ==null) {
+				id = DAOCliente.create(cliente);
+			}
 		}
 		
 		

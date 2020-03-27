@@ -9,7 +9,7 @@ import javax.swing.JTabbedPane;
 
 import Presentacion.Cliente.GUICliente;
 
-public class GUIFarmacia extends JFrame{
+public class GUIFarmacia extends JFrame implements IGUI{
 	
 	public static String TAB_PROVEEDOR = "Proveedor";
 	public static String TAB_CLIENTE = "Cliente";
@@ -53,6 +53,14 @@ public class GUIFarmacia extends JFrame{
 		
 		
 		
+		
+	}
+
+
+
+	@Override
+	public void actualizar(Object data, Integer evento) {
+		// TODO Auto-generated method stub
 		
 	}
 	

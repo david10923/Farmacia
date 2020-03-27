@@ -120,8 +120,25 @@ public class OperationsPanel extends JPanel {
 			
 		});
 	}
-	
-	
+
+
+
+	public JButton getAltaBoton() {
+		return altaBoton;
+	}
+
+
+
+	public JButton getBajaBoton() {
+		return bajaBoton;
+	}
+
+
+	public JButton getModificarBoton() {
+		return modificarBoton;
+	}
+
+
 	
 	
 }
