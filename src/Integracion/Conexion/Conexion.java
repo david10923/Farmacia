@@ -17,7 +17,7 @@ public class Conexion {
 		
 	}
 	
-	//os quiero a todos por igual
+	
 	//carga el controlador solo una vez, al cargar la aplicacion, no es necesario llamar a ningun metodo
 	static {
 		try {
