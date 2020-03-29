@@ -34,7 +34,7 @@ public class SAClienteImp implements SACliente{
 	}
 
 	@Override
-	public TCliente read(int id) {
+	public TCliente read(String nif) {
 		
 		return null;
 	}
@@ -50,14 +50,32 @@ public class SAClienteImp implements SACliente{
 	public int update(TCliente tCliente) {
 		
 		
+		
+		
 		return 0;
 	}
 
 	@Override
-	public int delete(int id) {
+	public boolean delete(String nif) {
 		
+		boolean ok = false;
 		
-		return 0;
+		DAOCliente daoCliente = new DAOClienteImp();
+		
+		if(nif!= null){ 
+			
+			TCliente aux = daoCliente.readByDNI(nif);
+			
+			if (aux !=null) {
+				
+				if(daoCliente.delete(nif))
+					ok = true;
+			}
+			
+		}
+			
+		return ok;
+		
 	}
 	
 

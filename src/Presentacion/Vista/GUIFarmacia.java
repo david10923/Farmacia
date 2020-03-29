@@ -63,14 +63,13 @@ public class GUIFarmacia extends JFrame implements IGUI{
 	@Override
 	public void actualizar(Object data, Integer evento) {
 		
-		
 		switch (evento) {
 		
 		case Evento.RES_ALTA_CLIENTE_OK:
 			
-			Integer id = (Integer) data;
+			Integer idAlta = (Integer) data;
 		
-			JOptionPane.showMessageDialog(null,"Usuario creado con ID: " +id.intValue());
+			JOptionPane.showMessageDialog(null,"Usuario creado con ID: " +idAlta.intValue());
 			setVisible(true);
 			
 			break;
@@ -81,7 +80,24 @@ public class GUIFarmacia extends JFrame implements IGUI{
 			setVisible(true);
 			
 			break;
-
+			
+			
+		case Evento.RES_BAJA_CLIENTE_OK:
+			
+			Integer idBaja = (Integer) data;
+			
+			JOptionPane.showMessageDialog(null,"Usuario puesto a inactivo con ID: " +idBaja.intValue());
+			setVisible(true);
+			
+			break;
+			
+		case Evento.RES_BAJA_CLIENTE_FAILED: // revisar el mensaje // ver si hay que poner que ya estaba dado de baja 
+			
+			JOptionPane.showMessageDialog(null,"No se ha podido poner a inactivo  al cliente ");
+			setVisible(true);
+			
+			break;
+			
 		default:
 			break;
 		}

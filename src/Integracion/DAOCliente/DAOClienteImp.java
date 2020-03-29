@@ -1,6 +1,7 @@
 package Integracion.DAOCliente;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,8 +73,10 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 		return aux;
 	}
 	
+	
+	
 	@Override
-	public TCliente read(int id) {
+	public TCliente read(String nif) {
 		
 		return null;
 	}
@@ -91,9 +94,26 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 	}
 
 	@Override
-	public int delete(int id) {
+	public boolean delete(String nif) {
+		boolean ret = false;
+		try {
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + Main.Main.database, Main.Main.user, Main.Main.password);
+			PreparedStatement ps = con.prepareStatement("UPDATE empleado SET activo=(?) WHERE ID=(?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setBoolean(1, false);
+			ps.setInt(2, te.get_id());
+			int res = ps.executeUpdate();
 		
-		return 0;
+			if(res > 0) {
+				ret = true;
+			}
+			con.close();
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			ret = false;
+		}
+		return ret;
 	}
 
 }
