@@ -1,7 +1,8 @@
 package Controller;
 
 
-public  abstract class Controller {
+public abstract class Controller {
+	
 	private static Controller instance;
 	
 	public static Controller getInstance(){

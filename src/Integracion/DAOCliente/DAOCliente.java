@@ -7,7 +7,7 @@ import Tranfers.TCliente;
 
 public interface DAOCliente {	
 	
-	public int create(TCliente tUsuario)throws SQLException;
+	public int create(TCliente tUsuario);
 	public TCliente read(int id);
 	public Collection<TCliente> readAll();
 	public TCliente readByDNI(String nombre);

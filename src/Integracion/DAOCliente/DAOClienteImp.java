@@ -14,7 +14,7 @@ import Tranfers.TCliente;
 public class DAOClienteImp extends Conexion implements DAOCliente {
 
 	@Override
-	public int create(TCliente tUsuario) throws SQLException {
+	public int create(TCliente tUsuario){
 		Connection con = null;
 		int id = -1;
 		String query = "INSERT INTO cliente(DNI, TARJETA_SANITARIA, NOMBRE, ESTADO) VALUES(?,?,?,?)";
@@ -25,19 +25,18 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 			ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, tUsuario.getDni());
 			ps.setString(2, tUsuario.getTarjetaSanitaria());
-			ps.setString(3, tUsuario.getDni());
+			ps.setString(3, tUsuario.getNombre());
 			ps.setBoolean(4, true);
-			
+			ps.executeUpdate();
 			ResultSet res = ps.getGeneratedKeys();
 			
 			if (res.next()) {
 				id = res.getInt(1);
-				JOptionPane.showMessageDialog(null, "Saved");
 			}
 			con.close();
 			
 		}catch (SQLException e) {
-			System.out.println("tupu");
+			System.out.println("No se ha podido crear");
 		}
 		
 		
@@ -67,7 +66,7 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 			con.close();
 			
 		}catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("");
 		}
 		
 		return aux;

@@ -5,8 +5,10 @@ import java.awt.Component;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
+import Controller.Evento;
 import Presentacion.Cliente.GUICliente;
 
 public class GUIFarmacia extends JFrame implements IGUI{
@@ -60,7 +62,29 @@ public class GUIFarmacia extends JFrame implements IGUI{
 
 	@Override
 	public void actualizar(Object data, Integer evento) {
-		// TODO Auto-generated method stub
+		
+		
+		switch (evento) {
+		
+		case Evento.RES_ALTA_CLIENTE_OK:
+			
+			Integer id = (Integer) data;
+		
+			JOptionPane.showMessageDialog(null,"Usuario creado con ID: " +id.intValue());
+			setVisible(true);
+			
+			break;
+			
+		case Evento.RES_ALTA_CLIENTE_FAILED:
+					
+			JOptionPane.showMessageDialog(null,"No se ha podido crear al cliente ");
+			setVisible(true);
+			
+			break;
+
+		default:
+			break;
+		}
 		
 	}
 	
