@@ -96,10 +96,10 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 	@Override
 	public boolean delete(String nif) {
 		boolean ret = false;
+		Connection con = null; 
 		try {
 			
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + Main.Main.database, Main.Main.user, Main.Main.password);
+			con = this.performConnection();	
 			PreparedStatement ps = con.prepareStatement("UPDATE empleado SET activo=(?) WHERE ID=(?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setBoolean(1, false);
 			ps.setInt(2, te.get_id());
