@@ -11,6 +11,6 @@ public interface SACliente {
 	public TCliente read(String nif);
 	public Collection<TCliente> readAll();
 	public int update(TCliente tCliente);
-	public boolean delete(String nif );
+	public int delete(String dni );
 
 }

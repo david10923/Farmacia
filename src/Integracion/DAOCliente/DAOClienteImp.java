@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -62,6 +64,10 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 			if (res.next()) {
 				aux = new TCliente();
 				aux.setCodigo(res.getInt(1));
+				aux.setDni(res.getString(2));
+				aux.setNombre(res.getString(3));
+				aux.setTarjetaSanitaria(res.getString(4));
+				aux.setEstado(res.getBoolean(5));
 			
 			}
 			con.close();
@@ -90,30 +96,89 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 	@Override
 	public int update(TCliente tUsuario) {
 		
-		return 0;
+		
+		int id = -1;
+
+		Connection con = null; 
+		try {
+			
+			con = this.performConnection();
+			PreparedStatement ps = con.prepareStatement("UPDATE cliente SET TARJETA_SANITARIA=?, NOMBRE=? "
+					+ " WHERE DNI=?", PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1, tUsuario.getTarjetaSanitaria());
+			ps.setString(2, tUsuario.getNombre());
+			ps.setString(3, tUsuario.getDni());
+			int res = ps.executeUpdate();
+		
+			if(res > 0) {
+				id = res;
+			}
+			con.close();
+			
+		} catch (SQLException e) {
+
+		}
+		return id;
+		
+
 	}
 
 	@Override
-	public boolean delete(String nif) {
-		boolean ret = false;
+	public int delete(String dni) {
+		
+		int id = -1;
+		
+
 		Connection con = null; 
 		try {
 			
 			con = this.performConnection();	
-			PreparedStatement ps = con.prepareStatement("UPDATE empleado SET activo=(?) WHERE ID=(?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement("UPDATE cliente SET estado=(?) WHERE DNI=(?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setBoolean(1, false);
-			ps.setInt(2, te.get_id());
+			ps.setString(2, dni);
 			int res = ps.executeUpdate();
 		
 			if(res > 0) {
-				ret = true;
+				id = res;
 			}
 			con.close();
 			
-		} catch (SQLException | ClassNotFoundException e) {
-			ret = false;
+		} catch (SQLException e) {
+
 		}
-		return ret;
+		return id;
+
+	}
+	
+	
+	public List<TCliente> listar(){
+	
+		List<TCliente> list = null;
+		
+		Connection con = null;
+		try {
+			con = this.performConnection();	
+			PreparedStatement ps = con.prepareStatement("select * from cliente");
+			
+			list = new ArrayList<TCliente>();
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				
+				TCliente aux = new TCliente(rs.getInt("codigo"), rs.getString("dni"),
+						rs.getString("tarjeta_sanitaria"), rs.getString("nombre"),rs.getBoolean("estado"));
+				
+				list.add(aux);
+				
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return list;
+		
 	}
 
 }

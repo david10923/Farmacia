@@ -48,33 +48,42 @@ public class SAClienteImp implements SACliente{
 
 	@Override
 	public int update(TCliente tCliente) {
+		int id = -1;
+
 		
+		DAOCliente daoCliente = new DAOClienteImp();
+		TCliente aux = daoCliente.readByDNI(tCliente.getDni());
 		
-		
-		
-		return 0;
+		if(tCliente.getDni().equals(aux.getDni())){ 
+
+			id = daoCliente.update(tCliente);	
+			
+		}
+			
+		return id;
 	}
 
 	@Override
-	public boolean delete(String nif) {
-		
-		boolean ok = false;
+	public int delete(String dni) {
+		int id = -1;
+
 		
 		DAOCliente daoCliente = new DAOClienteImp();
 		
-		if(nif!= null){ 
+		if(dni!= null){ 
 			
-			TCliente aux = daoCliente.readByDNI(nif);
+			TCliente aux = daoCliente.readByDNI(dni);
 			
 			if (aux !=null) {
 				
-				if(daoCliente.delete(nif))
-					ok = true;
+				
+				id = daoCliente.delete(dni);
+
 			}
 			
 		}
 			
-		return ok;
+		return id;
 		
 	}
 	

@@ -17,6 +17,14 @@ public class TCliente {
 		
 	}
 	
+	public TCliente(int codigo, String dni ,String tarjetaSanitaria, String nombre, boolean estado) {
+		this.codigo =codigo;
+		this.dni = dni; 
+		this.tarjetaSanitaria = tarjetaSanitaria ; 
+		this.nombre = nombre;
+		this.estado = estado;
+	}
+	
 	public TCliente() {
 		
 	}

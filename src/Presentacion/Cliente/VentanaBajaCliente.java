@@ -34,32 +34,13 @@ public class VentanaBajaCliente extends JDialog implements ActionListener{
 		iniciarventana();
 		
 		
-		/////NOMBRE //////		
-		NOMBRE_Label = new JLabel("NOMBRE: ");		
-		NOMBRE_Label.setBounds(10, 120, 165, 25);		
-		this.add(NOMBRE_Label);		
-		NOMBRE_Text = new JTextField();		
-		NOMBRE_Text.setBounds(100, 120, 165, 25);		
-		this.add(NOMBRE_Text);
-		
-		
 		////////DNI////////
 		DNI_Label = new JLabel("DNI: ");		
-		DNI_Label.setBounds(10, 20, 80, 25);		
+		DNI_Label.setBounds(10, 120, 165, 25);		
 		this.add(DNI_Label);		
 		DNI_Text = new JTextField();		
-		DNI_Text.setBounds(100, 20, 165, 25);		
+		DNI_Text.setBounds(100, 120, 165, 25);		
 		this.add(DNI_Text);
-		
-		
-		///////TARJETA SANITARIA////////		
-		TARJETA_Label = new JLabel("TARJETA SANITARIA: ");		
-		TARJETA_Label.setBounds(10, 70, 80, 25);		
-		this.add(TARJETA_Label);		
-		TARJETA_Text = new JTextField();		
-		TARJETA_Text.setBounds(100, 70, 165, 25);		
-		this.add(TARJETA_Text);
-		this.add(Box.createRigidArea(new Dimension(5,5)));
 		
 		
 		//////BOTON DE ACEPTAR/////
@@ -92,7 +73,8 @@ void iniciarventana(){
 		Object botonPulsado = e.getSource();
 		
 		if (botonPulsado == botonAceptar) {
-			TCliente aux = new TCliente(DNI_Text.getText(), TARJETA_Text.getText(), NOMBRE_Text.getText());
+			
+			String aux = DNI_Text.getText();
 			
 			Controller.getInstance().action(aux, Evento.BAJA_CLIENTE);			
 			removeBox();
@@ -108,8 +90,6 @@ void iniciarventana(){
 	
 	public void removeBox() {
 		DNI_Text.setText(null);
-		TARJETA_Text.setText(null);
-		NOMBRE_Text.setText(null);
 	}
 	
 }

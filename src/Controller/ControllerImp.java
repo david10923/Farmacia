@@ -53,15 +53,15 @@ public class ControllerImp extends Controller{
 		}
 		case Evento.BAJA_CLIENTE:{
 			
-			TCliente tcliente = (TCliente) data ;
+			String dni_cliente = (String) data ;
 			
-			boolean ok = saCliente.delete(tcliente.getDni());
+			int res = saCliente.delete(dni_cliente);
 			
-			if(ok){
+			if(res > 0){
 				farmacia.actualizar(res,Evento.RES_BAJA_CLIENTE_OK);
 			}
 			else{
-				farmacia.actualizar(res,Evento.RES_ALTA_CLIENTE_FAILED);
+				farmacia.actualizar(null,Evento.RES_ALTA_CLIENTE_FAILED);
 			}
 			
 			
@@ -70,6 +70,17 @@ public class ControllerImp extends Controller{
 		}
 		case Evento.MODIFICAR_CLIENTE:{
 			
+			
+			TCliente tCliente = (TCliente) data;
+			
+			int res = saCliente.update(tCliente);
+			
+			if(res > 0){
+				farmacia.actualizar(res,Evento.RES_MODIFICAR_CLIENTE_OK);
+			}
+			else{
+				farmacia.actualizar(null,Evento.RES_MODIFICAR_CLIENTE_FAILED);
+			}
 			
 			break;
 			

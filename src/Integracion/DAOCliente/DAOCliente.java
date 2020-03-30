@@ -12,6 +12,6 @@ public interface DAOCliente {
 	public Collection<TCliente> readAll();
 	public TCliente readByDNI(String nombre);
 	public int update(TCliente tUsuario);
-	public boolean delete (String nif);
+	public int delete (String dni);
 
 }

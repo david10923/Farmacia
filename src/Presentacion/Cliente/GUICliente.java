@@ -34,8 +34,6 @@ public class GUICliente extends JPanel implements ActionListener {
 		OperationsPanel.getAltaBoton().addActionListener(this);
 		OperationsPanel.getBajaBoton().addActionListener(this);
 		OperationsPanel.getModificarBoton().addActionListener(this);
-		
-		
 	}
 
 

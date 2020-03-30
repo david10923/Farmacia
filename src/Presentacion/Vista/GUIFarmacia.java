@@ -98,6 +98,23 @@ public class GUIFarmacia extends JFrame implements IGUI{
 			
 			break;
 			
+		case Evento.RES_MODIFICAR_CLIENTE_OK:
+			
+			Integer idMod = (Integer) data;
+			
+			JOptionPane.showMessageDialog(null,"Modificado correctamente: " +idMod.intValue());
+			setVisible(true);
+			
+			break;
+			
+		case Evento.RES_MODIFICAR_CLIENTE_FAILED:
+			
+			
+			JOptionPane.showMessageDialog(null,"No se ha podido modificar ");
+			setVisible(true);
+			
+			break;
+				
 		default:
 			break;
 		}
