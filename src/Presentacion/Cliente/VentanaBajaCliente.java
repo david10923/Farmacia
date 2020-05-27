@@ -1,10 +1,10 @@
 package Presentacion.Cliente;
 
-import java.awt.Dimension;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -12,16 +12,16 @@ import javax.swing.JTextField;
 
 import Controller.Controller;
 import Controller.Evento;
-import Tranfers.TCliente;
+
 
 public class VentanaBajaCliente extends JDialog implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel DNI_Label; 
 	private JTextField DNI_Text;
-	private JLabel TARJETA_Label;
-	private JTextField TARJETA_Text;
-	private JLabel NOMBRE_Label;
-	private JTextField NOMBRE_Text;
 	private JButton botonAceptar;
 	private JButton botonCancelar;
 	
@@ -62,7 +62,7 @@ void iniciarventana(){
 		
 		this.setBounds(350, 100,300,400);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//salta exception aqui
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(null);
 		this.setTitle("Baja Cliente");
 	}
@@ -78,10 +78,10 @@ void iniciarventana(){
 			
 			Controller.getInstance().action(aux, Evento.BAJA_CLIENTE);			
 			removeBox();
+			setVisible(false);			
 			
 		}else if (botonPulsado == botonCancelar) {			
 			setVisible(false);			
-			dispose();
 			
 		}
 		

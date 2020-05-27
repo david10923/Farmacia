@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 import javax.swing.border.TitledBorder;
 
 import Presentacion.Cliente.VentanaCrearCliente;
@@ -34,10 +35,10 @@ public class OperationsPanel extends JPanel {
 	
 	public void initOperationPanel() {	
 			
-		this.setLayout(new GridLayout());
+		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 1), "Operations",
 				TitledBorder.LEFT, TitledBorder.TOP));
-		this.setPreferredSize(new Dimension(700, 250));
+		this.setPreferredSize(new Dimension(375, 275));
 		
 		
 		this.setVisible(true);
@@ -48,25 +49,27 @@ public class OperationsPanel extends JPanel {
 	
 	
 	public void inicializarBotones(){
+		JToolBar jt = new JToolBar();
 		
-		Box caja1 = Box.createHorizontalBox();	
+		
+		this.add(jt,BorderLayout.CENTER);		
+		
+		//jt.setBackground(Color.CYAN);
+		//Box caja1 = Box.createHorizontalBox();
 		
 		
 		altaBoton      = new JButton("DAR DE ALTA");
 		bajaBoton      = new JButton("DAR DE BAJA");
 		modificarBoton = new JButton("MODIFICAR");
 
-			
-		caja1.add(Box.createHorizontalStrut(20));
-		caja1.add(altaBoton);
-		caja1.add(Box.createHorizontalStrut(20));
-		caja1.add(bajaBoton);
-		caja1.add(Box.createHorizontalStrut(20));
-		caja1.add(modificarBoton);		
-
-
-		this.add(caja1);
-	
+		jt.addSeparator(new Dimension(20,0));
+		jt.add(altaBoton);
+		jt.addSeparator();
+		jt.add(bajaBoton);
+		jt.addSeparator();
+		jt.add(modificarBoton);
+		
+		
 		altaBoton.setVisible(true);
 		bajaBoton.setVisible(true);
 		modificarBoton.setVisible(true);

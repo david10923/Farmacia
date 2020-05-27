@@ -2,28 +2,28 @@ package Presentacion.Cliente;
 
 
 
-import java.awt.BorderLayout;
+
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
+
 
 import Controller.Controller;
 import Controller.Evento;
-import Tranfers.TCliente;
+import Negocio.Cliente.TCliente;
 
 public class VentanaCrearCliente extends JDialog implements ActionListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel DNI_Label; 
 	private JTextField DNI_Text;
 	private JLabel TARJETA_Label;
@@ -98,19 +98,20 @@ public class VentanaCrearCliente extends JDialog implements ActionListener {
 		Object botonPulsado = e.getSource();
 		
 		if (botonPulsado == botonAceptar) {
-			TCliente aux = new TCliente(DNI_Text.getText(), TARJETA_Text.getText(), NOMBRE_Text.getText());
-			
+			TCliente aux = null;
+			if(!TARJETA_Text.getText().equals("") && !NOMBRE_Text.getText().equals("")) {
+				aux = new TCliente(DNI_Text.getText(), TARJETA_Text.getText(), NOMBRE_Text.getText());	
+			}
 			Controller.getInstance().action(aux, Evento.ALTA_CLIENTE);
-			
+		
 			removeBox();
+			setVisible(false);
 			
 		}else if (botonPulsado == botonCancelar) {			
 			setVisible(false);			
 			dispose();
 			
 		}
-		
-		
 		
 	}
 	

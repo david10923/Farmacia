@@ -1,18 +1,15 @@
 package Integracion.DAOCliente;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 
 import Integracion.Conexion.Conexion;
-import Tranfers.TCliente;
+import Negocio.Cliente.TCliente;
 
 public class DAOClienteImp extends Conexion implements DAOCliente {
 
@@ -65,8 +62,8 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 				aux = new TCliente();
 				aux.setCodigo(res.getInt(1));
 				aux.setDni(res.getString(2));
-				aux.setNombre(res.getString(3));
-				aux.setTarjetaSanitaria(res.getString(4));
+				aux.setTarjetaSanitaria(res.getString(3));
+				aux.setNombre(res.getString(4));
 				aux.setEstado(res.getBoolean(5));
 			
 			}
@@ -87,31 +84,38 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 		return null;
 	}
 
-	@Override
-	public Collection<TCliente> readAll() {
-		
-		return null;
-	}
 
 	@Override
-	public int update(TCliente tUsuario) {
+	public int update(TCliente tUsuario,boolean reactivar) {
 		
 		
-		int id = -1;
+		int id = -1, res;
 
 		Connection con = null; 
 		try {
 			
 			con = this.performConnection();
-			PreparedStatement ps = con.prepareStatement("UPDATE cliente SET TARJETA_SANITARIA=?, NOMBRE=? "
+			
+			if(!reactivar){
+				PreparedStatement ps = con.prepareStatement("UPDATE cliente SET TARJETA_SANITARIA=?, NOMBRE=?"
 					+ " WHERE DNI=?", PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setString(1, tUsuario.getTarjetaSanitaria());
-			ps.setString(2, tUsuario.getNombre());
-			ps.setString(3, tUsuario.getDni());
-			int res = ps.executeUpdate();
+				ps.setString(1, tUsuario.getTarjetaSanitaria());
+				ps.setString(2, tUsuario.getNombre());	
+				ps.setString(3, tUsuario.getDni());
+				res = ps.executeUpdate();
+					
+			}else{
+				PreparedStatement ps = con.prepareStatement("UPDATE cliente SET ESTADO=? "
+						+ " WHERE DNI=?", PreparedStatement.RETURN_GENERATED_KEYS);		
+					ps.setBoolean(1,true);
+					ps.setString(2, tUsuario.getDni());
+					res = ps.executeUpdate();
+			}
+			
 		
 			if(res > 0) {
-				id = res;
+				
+				id = tUsuario.getCodigo();
 			}
 			con.close();
 			
@@ -119,12 +123,10 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 
 		}
 		return id;
-		
-
 	}
 
 	@Override
-	public int delete(String dni) {
+	public int delete(int codigo) {
 		
 		int id = -1;
 		
@@ -133,13 +135,13 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 		try {
 			
 			con = this.performConnection();	
-			PreparedStatement ps = con.prepareStatement("UPDATE cliente SET estado=(?) WHERE DNI=(?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = con.prepareStatement("UPDATE cliente SET estado=(?) WHERE CODIGO_CLIENTE=(?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setBoolean(1, false);
-			ps.setString(2, dni);
+			ps.setInt(2, codigo);
 			int res = ps.executeUpdate();
 		
 			if(res > 0) {
-				id = res;
+				id = codigo;
 			}
 			con.close();
 			
@@ -151,22 +153,25 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 	}
 	
 	
-	public List<TCliente> listar(){
+	public List<TCliente> readAll(){
 	
-		List<TCliente> list = null;
+		List<TCliente> list = new ArrayList<TCliente>();
 		
 		Connection con = null;
 		try {
 			con = this.performConnection();	
-			PreparedStatement ps = con.prepareStatement("select * from cliente");
+			PreparedStatement ps = con.prepareStatement("select * from cliente", PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			list = new ArrayList<TCliente>();
+			ResultSet res = ps.executeQuery();
 			
-			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			while(res.next()) {
+				TCliente aux = new TCliente();
 				
-				TCliente aux = new TCliente(rs.getInt("codigo"), rs.getString("dni"),
-						rs.getString("tarjeta_sanitaria"), rs.getString("nombre"),rs.getBoolean("estado"));
+				aux.setCodigo(res.getInt(1));
+				aux.setDni(res.getString(2));
+				aux.setTarjetaSanitaria(res.getString(3));
+				aux.setNombre(res.getString(4));
+				aux.setEstado(res.getBoolean(5));
 				
 				list.add(aux);
 				
@@ -174,11 +179,47 @@ public class DAOClienteImp extends Conexion implements DAOCliente {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			list.clear();
 		}
 		
 		return list;
 		
+	}
+
+
+	@Override
+	public TCliente readById(int id) {
+		
+		Connection con = null;
+		TCliente aux = null;
+		
+		String query = "SELECT * FROM cliente WHERE CODIGO_CLIENTE=?";
+		
+		try {
+			con = this.performConnection();	
+			PreparedStatement ps;
+			ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, id);
+			
+			ResultSet res = ps.executeQuery();
+			
+			if (res.next()) {
+				
+				aux = new TCliente();
+				aux.setCodigo(res.getInt(1));
+				aux.setDni(res.getString(2));
+				aux.setNombre(res.getString(4));
+				aux.setTarjetaSanitaria(res.getString(3));
+				aux.setEstado(res.getBoolean(5));
+			
+			}
+			con.close();
+			
+		}catch (Exception e) {
+			System.out.println("");
+		}
+		
+		return aux;
 	}
 
 }

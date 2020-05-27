@@ -14,4 +14,5 @@ public abstract class Controller {
 	
 	
 	public abstract void action(Object data ,Integer event);
+	
 }

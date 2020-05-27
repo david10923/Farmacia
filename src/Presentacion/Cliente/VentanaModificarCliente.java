@@ -12,11 +12,15 @@ import javax.swing.JTextField;
 
 import Controller.Controller;
 import Controller.Evento;
-import Tranfers.TCliente;
+import Negocio.Cliente.TCliente;
 
 public class VentanaModificarCliente extends JDialog implements ActionListener{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel DNI_Label; 
 	private JTextField DNI_Text;
 	private JLabel TARJETA_Label;
@@ -91,16 +95,17 @@ public class VentanaModificarCliente extends JDialog implements ActionListener{
 		Object botonPulsado = e.getSource();
 		
 		if (botonPulsado == botonAceptar) {
-			TCliente aux = new TCliente(DNI_Text.getText(), TARJETA_Text.getText(), NOMBRE_Text.getText());
-			
+			TCliente aux = null;
+			if(!TARJETA_Text.getText().equals("") && !NOMBRE_Text.getText().equals("")) {
+				aux = new TCliente(DNI_Text.getText(), TARJETA_Text.getText(), NOMBRE_Text.getText());
+			}
 			Controller.getInstance().action(aux, Evento.MODIFICAR_CLIENTE);
 			
 			removeBox();
+			setVisible(false);
 			
 		}else if (botonPulsado == botonCancelar) {			
-			setVisible(false);			
-			dispose();
-			
+			setVisible(false);					
 		}
 		
 		
